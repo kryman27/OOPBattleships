@@ -42,8 +42,8 @@ class ShipLoader
         
         return $this->createShipFromData($shipArray);
     }
-    
-    private function createShipFromData(array $shipData)
+
+    private function createShipFromData(array $shipData): Ship
     {
         $ship = new Ship($shipData['name']);
         $ship->setId($shipData['id']);
@@ -53,8 +53,11 @@ class ShipLoader
         
         return $ship;
     }
-
-    private function queryForShips()
+    
+    /**
+     * @return Ship[]
+     */
+    private function queryForShips(): array
     {
         $statement = $this->getPDO()->prepare('SELECT * FROM ship');
         $statement->execute();
